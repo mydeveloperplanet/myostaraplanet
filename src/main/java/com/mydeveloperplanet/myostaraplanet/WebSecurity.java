@@ -15,6 +15,9 @@ public class WebSecurity {
         http.authorizeHttpRequests(authz -> authz
                 .requestMatchers("/actuator/**").hasRole("ADMIN")
                 .anyRequest().permitAll())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/actuator/**")
+                )
                 .httpBasic(Customizer.withDefaults());
         return http.build();
 
